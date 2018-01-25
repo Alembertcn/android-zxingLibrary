@@ -19,8 +19,7 @@ import com.uuzuche.lib_zxing.R;
  * 默认的二维码扫描Activity
  */
 public class CaptureActivity extends AppCompatActivity {
-
-
+    public static final String PARAMS_TITLE = "params_title";
     TextView mTvTitle;
 
     @Override
@@ -51,7 +50,7 @@ public class CaptureActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String title = "";//标题
         if (intent != null) {
-            title = intent.getStringExtra("title");
+            title = intent.getStringExtra(PARAMS_TITLE);
         }
         mTvTitle.setText(title + "");
         mTvTitle.setVisibility(TextUtils.isEmpty(title) ? View.GONE : View.VISIBLE);
