@@ -17,7 +17,7 @@
         app:inner_margintop="150dp"
         app:inner_corner_color="#A4F9D0"
         app:inner_corner_length="30dp"
-        app:inner_corner_width="5dp"
+        app:inner_corner_width="2dp"
         app:inner_scan_speed="10"
         app:inner_scan_iscircle="false"
         android:layout_width="wrap_content"
