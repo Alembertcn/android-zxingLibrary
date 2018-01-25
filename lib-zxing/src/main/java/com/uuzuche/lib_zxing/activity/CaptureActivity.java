@@ -2,9 +2,14 @@ package com.uuzuche.lib_zxing.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.uuzuche.lib_zxing.R;
 
@@ -16,11 +21,19 @@ import com.uuzuche.lib_zxing.R;
 public class CaptureActivity extends AppCompatActivity {
 
 
+    TextView mTvTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera);
+        // 经测试在代码里直接声明透明状态栏更有效
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+
         CaptureFragment captureFragment = new CaptureFragment();
         captureFragment.setAnalyzeCallback(analyzeCallback);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_zxing_container, captureFragment).commit();
@@ -32,6 +45,21 @@ public class CaptureActivity extends AppCompatActivity {
                 } else {
                     Log.e("TAG", "callBack: ", e);
                 }
+            }
+        });
+        mTvTitle = (TextView) findViewById(R.id.tv_title);
+        Intent intent = getIntent();
+        String title = "";//标题
+        if (intent != null) {
+            title = intent.getStringExtra("title");
+        }
+        mTvTitle.setText(title + "");
+        mTvTitle.setVisibility(TextUtils.isEmpty(title) ? View.GONE : View.VISIBLE);
+
+        mTvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -207,11 +206,13 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.button2) {
+                //第二个按钮
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, REQUEST_IMAGE);
             } else if (v.getId() == R.id.button4) {
+                //第三个按钮
                 Intent intent = new Intent(MainActivity.this, ThreeActivity.class);
                 startActivity(intent);
             } else {
